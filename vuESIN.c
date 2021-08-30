@@ -31,7 +31,6 @@ int main(void){
 	// Wait for the micro program
 	vifdata[i++] = VIFFLUSHE;
 
-	printf("%d\n",i / 4);
 	// Set transfer source address and qword count
 	VIF1MADR = (u32)&vifdata;
 	VIF1QWC = (i / 4) + 1;
@@ -45,11 +44,6 @@ int main(void){
 	// Wait for DMA transfer
 	while(VIF1CHCR & 0x100) {}
 
-	asm(
-		"vu1_active2:\n"
-		"bc2t vu1_active2\n"
-		"nop\n"
-		);
 					// Change the iteration count based on the iterations in the micro program
 	for(int i = 0; i < 20; i++)
 	{
