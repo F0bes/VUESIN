@@ -1,0 +1,30 @@
+.vu
+.align 4
+.global vuESIN_CodeStart
+.global vuESIN_CodeEnd
+
+vuESIN_CodeStart:
+
+; Counter
+NOP						iaddiu VI01,VI00,0
+NOP						iaddiu VI02, VI00, 20
+NOP						loi -5
+addi.x VF01, VF00, I	loi 0.5
+
+loopStart:
+NOP						ESIN P, VF01x
+NOP						waitp
+NOP						mfp.y VF01, P
+NOP						sq.xy VF01, 0(VI01)
+
+
+addi.x VF01, VF01, I	iaddiu VI01, VI01,1
+NOP						NOP
+NOP						ibne VI01, VI02, loopStart
+NOP						NOP
+
+NOP[E]					NOP
+NOP						NOP
+
+
+vuESIN_CodeEnd:
